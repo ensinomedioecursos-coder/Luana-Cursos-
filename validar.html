@@ -6,65 +6,130 @@
 <title>Validação de Certificado - Luana Cursos</title>
 
 <style>
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f4f7f5;
-  color:#222;
+* {
+  box-sizing: border-box;
 }
-header{
-  background:#087f3e;
-  color:white;
-  text-align:center;
-  padding:30px 15px;
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f3f5f7;
+  color: #222;
 }
-.container{
-  max-width:600px;
-  margin:30px auto;
-  padding:20px;
+
+header {
+  background: #071d3a;
+  color: white;
+  text-align: center;
+  padding: 30px 15px;
+  border-bottom: 5px solid #f5b900;
 }
-.card{
-  background:white;
-  padding:25px;
-  border-radius:18px;
-  box-shadow:0 3px 15px #0002;
+
+header h1 {
+  margin: 0;
+  font-size: 28px;
 }
-input{
-  width:100%;
-  padding:15px;
-  margin:10px 0;
-  border:1px solid #ccc;
-  border-radius:10px;
-  font-size:16px;
+
+header p {
+  margin: 8px 0 0;
 }
-button{
-  width:100%;
-  padding:15px;
-  background:#087f3e;
-  color:white;
-  border:0;
-  border-radius:10px;
-  font-size:17px;
-  font-weight:bold;
+
+.container {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 20px;
 }
-.resultado{
-  margin-top:20px;
-  padding:18px;
-  border-radius:12px;
-  display:none;
+
+.card {
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 3px 15px rgba(0,0,0,0.12);
 }
-.valido{
-  background:#e8f7ed;
-  border:1px solid #37a85b;
+
+h2 {
+  color: #071d3a;
+  text-align: center;
 }
-.invalido{
-  background:#fff0f0;
-  border:1px solid #d33;
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
 }
-footer{
-  text-align:center;
-  padding:25px;
-  color:#666;
+
+input {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background: #f5b900;
+  color: #071d3a;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #dca600;
+}
+
+.resultado {
+  margin-top: 25px;
+  display: none;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.valido {
+  display: block;
+  background: #e9f8ed;
+  border: 2px solid #2e9d50;
+}
+
+.invalido {
+  display: block;
+  background: #fff0f0;
+  border: 2px solid #d33;
+}
+
+.valido h3 {
+  color: #21863a;
+}
+
+.invalido h3 {
+  color: #b00000;
+}
+
+.dado {
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.dado strong {
+  color: #071d3a;
+}
+
+.codigo {
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #666;
+  font-size: 14px;
 }
 </style>
 </head>
@@ -72,93 +137,118 @@ footer{
 <body>
 
 <header>
-<h1>LUANA CURSOS</h1>
-<p>Consulta de Certificados</p>
+  <h1>LUANA CURSOS</h1>
+  <p>Consulta e validação de certificados</p>
 </header>
 
 <div class="container">
 
-<div class="card">
-<h2>Validar Certificado</h2>
+  <div class="card">
 
-<p>
-Digite o código de validação informado no certificado.
-</p>
+    <h2>🔎 Validar Certificado</h2>
 
-<input
-id="codigo"
-placeholder="Ex.: LUC-2026-000001"
->
+    <p style="text-align:center;">
+      Digite o código de validação informado no certificado.
+    </p>
 
-<button onclick="validar()">
-Consultar certificado
-</button>
+    <label for="codigo">Código de validação</label>
 
-<div id="resultado" class="resultado"></div>
+    <input
+      type="text"
+      id="codigo"
+      placeholder="Ex.: LC-2026-00001"
+      autocomplete="off"
+    >
 
-</div>
+    <button onclick="validarCertificado()">
+      CONSULTAR CERTIFICADO
+    </button>
+
+    <div id="resultado" class="resultado"></div>
+
+  </div>
 
 </div>
 
 <footer>
-© 2026 Luana Cursos
+  © 2026 Luana Cursos — Sistema de consulta de certificados.
 </footer>
 
 <script>
 
-function validar(){
+const certificados = {
 
-const codigo =
-document.getElementById("codigo").value
-.trim()
-.toUpperCase();
+  "LC-2026-00001": {
+    nome: "NOME DO ALUNO",
+    curso: "Operador de Trator",
+    carga: "600 horas",
+    data: "24/09/2026",
+    situacao: "Válido"
+  },
 
-const resultado =
-document.getElementById("resultado");
+  "LC-2026-00002": {
+    nome: "NOME DO ALUNO",
+    curso: "Curso Profissionalizante",
+    carga: "50 horas",
+    data: "24/09/2026",
+    situacao: "Válido"
+  }
 
-resultado.style.display="block";
+};
 
-if(codigo === "LUC-2026-000001"){
+function validarCertificado() {
 
-resultado.className="resultado valido";
+  const campo = document.getElementById("codigo");
+  const resultado = document.getElementById("resultado");
 
-resultado.innerHTML=`
-<h3>✓ Registro encontrado</h3>
+  const codigo = campo.value.trim().toUpperCase();
 
-<p><strong>Código:</strong> LUC-2026-000001</p>
+  resultado.className = "resultado";
 
-<p><strong>Curso:</strong> Curso de Operador de Trator</p>
+  if (!codigo) {
+    resultado.classList.add("invalido");
 
-<p><strong>Carga horária:</strong> 600 horas</p>
+    resultado.innerHTML = `
+      <h3>⚠️ Digite um código</h3>
+      <p>Informe o código de validação do certificado.</p>
+    `;
 
-<p><strong>Status:</strong> Registro encontrado no sistema</p>
+    return;
+  }
 
-<hr>
+  const certificado = certificados[codigo];
 
-<small>
-Esta consulta confirma apenas a existência
-do código informado no sistema de consulta
-da Luana Cursos.
-</small>
-`;
+  if (certificado) {
 
-}else{
+    resultado.classList.add("valido");
 
-resultado.className="resultado invalido";
+    resultado.innerHTML = `
+      <h3>✅ CERTIFICADO VÁLIDO</h3>
 
-resultado.innerHTML=`
-<h3>Registro não encontrado</h3>
-<p>
-Não foi localizado um registro para o código informado.
-Confira o código e tente novamente.
-</p>
-`;
+      <div class="dado">
+        <strong>Nome:</strong><br>
+        ${certificado.nome}
+      </div>
 
-}
+      <div class="dado">
+        <strong>Curso:</strong><br>
+        ${certificado.curso}
+      </div>
 
-}
+      <div class="dado">
+        <strong>Carga horária:</strong><br>
+        ${certificado.carga}
+      </div>
 
-</script>
+      <div class="dado">
+        <strong>Data de emissão:</strong><br>
+        ${certificado.data}
+      </div>
 
-</body>
-</html>
+      <div class="dado">
+        <strong>Situação:</strong><br>
+        ${certificado.situacao}
+      </div>
+
+      <div class="dado">
+        <strong>Códig
