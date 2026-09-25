@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Validação de Certificado - Luana Cursos</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f4f7f5;
+  color:#222;
+}
+header{
+  background:#087f3e;
+  color:white;
+  text-align:center;
+  padding:30px 15px;
+}
+.container{
+  max-width:600px;
+  margin:30px auto;
+  padding:20px;
+}
+.card{
+  background:white;
+  padding:25px;
+  border-radius:18px;
+  box-shadow:0 3px 15px #0002;
+}
+input{
+  width:100%;
+  padding:15px;
+  margin:10px 0;
+  border:1px solid #ccc;
+  border-radius:10px;
+  font-size:16px;
+}
+button{
+  width:100%;
+  padding:15px;
+  background:#087f3e;
+  color:white;
+  border:0;
+  border-radius:10px;
+  font-size:17px;
+  font-weight:bold;
+}
+.resultado{
+  margin-top:20px;
+  padding:18px;
+  border-radius:12px;
+  display:none;
+}
+.valido{
+  background:#e8f7ed;
+  border:1px solid #37a85b;
+}
+.invalido{
+  background:#fff0f0;
+  border:1px solid #d33;
+}
+footer{
+  text-align:center;
+  padding:25px;
+  color:#666;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>LUANA CURSOS</h1>
+<p>Consulta de Certificados</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+<h2>Validar Certificado</h2>
+
+<p>
+Digite o código de validação informado no certificado.
+</p>
+
+<input
+id="codigo"
+placeholder="Ex.: LUC-2026-000001"
+>
+
+<button onclick="validar()">
+Consultar certificado
+</button>
+
+<div id="resultado" class="resultado"></div>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 Luana Cursos
+</footer>
+
+<script>
+
+function validar(){
+
+const codigo =
+document.getElementById("codigo").value
+.trim()
+.toUpperCase();
+
+const resultado =
+document.getElementById("resultado");
+
+resultado.style.display="block";
+
+if(codigo === "LUC-2026-000001"){
+
+resultado.className="resultado valido";
+
+resultado.innerHTML=`
+<h3>✓ Registro encontrado</h3>
+
+<p><strong>Código:</strong> LUC-2026-000001</p>
+
+<p><strong>Curso:</strong> Curso de Operador de Trator</p>
+
+<p><strong>Carga horária:</strong> 600 horas</p>
+
+<p><strong>Status:</strong> Registro encontrado no sistema</p>
+
+<hr>
+
+<small>
+Esta consulta confirma apenas a existência
+do código informado no sistema de consulta
+da Luana Cursos.
+</small>
+`;
+
+}else{
+
+resultado.className="resultado invalido";
+
+resultado.innerHTML=`
+<h3>Registro não encontrado</h3>
+<p>
+Não foi localizado um registro para o código informado.
+Confira o código e tente novamente.
+</p>
+`;
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
